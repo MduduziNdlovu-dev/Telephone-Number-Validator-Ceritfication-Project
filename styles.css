@@ -1,15 +1,21 @@
-/* styles.css */
+/* Base Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     background-color: #f4f4f4;
-  }
-  
-  .container {
+    transition: background-color 0.3s ease;
+}
+
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.container {
     text-align: center;
     background-color: #fff;
     padding: 2rem;
@@ -17,63 +23,88 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
-  }
-  
-  h1 {
+    transition: all 0.3s ease;
+}
+
+.container.dark-mode {
+    background-color: #222;
+}
+
+h1 {
     margin-bottom: 1rem;
-  }
-  
-  select {
+    font-size: 2rem;
+}
+
+select,
+button {
     padding: 8px;
     font-size: 16px;
-    margin-bottom: 1rem;
-  }
-  
-  input {
-    padding: 10px;
+    margin: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input {
+    padding: 12px;
     font-size: 16px;
     width: 100%;
     margin: 10px 0;
     border: 2px solid #ccc;
     border-radius: 4px;
-    transition: border-color 0.3s;
-  }
-  
-  input.valid {
+    transition: border-color 0.3s ease;
+}
+
+input.valid {
     border-color: green;
-  }
-  
-  input.invalid {
+}
+
+input.invalid {
     border-color: red;
-  }
-  
-  .buttons {
-    margin: 10px 0;
-  }
-  
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 5px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  #results-div, #history-div {
+}
+
+#results-div,
+#history-div {
     margin-top: 15px;
     font-size: 18px;
-  }
-  
-  #history-div p {
+}
+
+#history-div p {
     margin: 5px 0;
     text-align: left;
-  }
-  
+    font-size: 16px;
+}
+
+#history-div {
+    display: none;
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+#history-div h3 {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    input, button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}

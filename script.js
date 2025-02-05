@@ -5,12 +5,16 @@ const locales = {
   en: {
     valid: "Valid SA number:",
     invalid: "Invalid SA number:",
-    empty: "Please provide a phone number"
+    empty: "Please provide a phone number",
+    areaCodeError: "Invalid area code. Please ensure it starts with 0 or +27.",
+    digitError: "Phone number must be 9 digits after the area code."
   },
   af: {
     valid: "Geldige SA nommer:",
     invalid: "Ongeldige SA nommer:",
-    empty: "Verskaf asseblief 'n telefoon nommer"
+    empty: "Verskaf asseblief 'n telefoon nommer",
+    areaCodeError: "Ongeldige area kode. Maak seker dit begin met 0 of +27.",
+    digitError: "Telefoonnommer moet 9 syfers wees na die area kode."
   }
 };
 
@@ -22,14 +26,14 @@ const languageSelector = document.getElementById("language-selector");
 const inputField = document.getElementById("user-input");
 const resultsDiv = document.getElementById("results-div");
 const historyDiv = document.getElementById("history-div");
+const themeToggle = document.getElementById("theme-toggle");
 
 // Listen for language change
 languageSelector.addEventListener("change", e => {
   currentLocale = e.target.value;
 });
 
-// Regex pattern for South African mobile numbers:
-// Accepts numbers starting with either "0" or "+27", followed by a digit between 6 and 8, and then 8 more digits.
+// Regex pattern for South African mobile numbers
 const zaPattern = /^(?:\+27|0)[6-8]\d{8}$/;
 
 // Function to validate SA phone numbers
@@ -49,6 +53,7 @@ const displayHistory = () => {
     historyDiv.innerHTML = "<p>No history available.</p>";
     return;
   }
+  historyDiv.style.display = "block";
   historyDiv.innerHTML =
     "<h3>Validation History:</h3>" +
     history
@@ -59,7 +64,7 @@ const displayHistory = () => {
       .join("");
 };
 
-// Validate input in real time and update UI
+// Validate input and provide detailed error messages
 const validateInput = phoneNumber => {
   if (!phoneNumber) {
     resultsDiv.innerHTML = "";
@@ -67,16 +72,28 @@ const validateInput = phoneNumber => {
     return;
   }
 
-  if (isValidPhoneNumber(phoneNumber)) {
+  if (!zaPattern.test(phoneNumber)) {
+    if (!phoneNumber.startsWith("0") && !phoneNumber.startsWith("+27")) {
+      inputField.classList.add("invalid");
+      inputField.classList.remove("valid");
+      resultsDiv.style.color = "red";
+      resultsDiv.innerHTML = locales[currentLocale].areaCodeError;
+    } else if (phoneNumber.length < 13) {
+      inputField.classList.add("invalid");
+      inputField.classList.remove("valid");
+      resultsDiv.style.color = "red";
+      resultsDiv.innerHTML = locales[currentLocale].digitError;
+    } else {
+      inputField.classList.add("invalid");
+      inputField.classList.remove("valid");
+      resultsDiv.style.color = "red";
+      resultsDiv.innerHTML = `${locales[currentLocale].invalid} ${phoneNumber}`;
+    }
+  } else {
     inputField.classList.add("valid");
     inputField.classList.remove("invalid");
     resultsDiv.style.color = "green";
     resultsDiv.innerHTML = `${locales[currentLocale].valid} ${phoneNumber}`;
-  } else {
-    inputField.classList.add("invalid");
-    inputField.classList.remove("valid");
-    resultsDiv.style.color = "red";
-    resultsDiv.innerHTML = `${locales[currentLocale].invalid} ${phoneNumber}`;
   }
 };
 
@@ -108,3 +125,20 @@ document.getElementById("clear-btn").addEventListener("click", () => {
 document.getElementById("show-history-btn").addEventListener("click", () => {
   displayHistory();
 });
+
+// Button: Toggle Theme (Dark Mode)
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+  const mode = document.body.classList.contains("dark-mode") ? "Dark" : "Light";
+  themeToggle.textContent = `Switch to ${mode} Mode`;
+});
+
+// PWA - Service Worker registration (Optional enhancement)
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then(registration => console.log("Service Worker registered:", registration))
+      .catch(error => console.log("Service Worker registration failed:", error));
+  });
+}

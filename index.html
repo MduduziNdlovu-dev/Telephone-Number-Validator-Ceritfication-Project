@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>South African Phone Number Validator</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json" />
 </head>
 <body>
   <div class="container">
@@ -16,8 +17,11 @@
       <option value="af">Afrikaans</option>
     </select>
     
+    <!-- Theme Toggle -->
+    <button id="theme-toggle">Switch to Dark Mode</button>
+    
     <!-- Phone Number Input -->
-    <input type="text" id="user-input" placeholder="Enter a SA phone number" />
+    <input type="text" id="user-input" placeholder="Enter a SA phone number" title="Enter a valid South African phone number starting with +27 or 0" />
     
     <!-- Buttons -->
     <div class="buttons">
