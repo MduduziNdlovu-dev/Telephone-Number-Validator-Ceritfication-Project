@@ -128,10 +128,13 @@ document.getElementById("show-history-btn").addEventListener("click", () => {
 
 // Button: Toggle Theme (Dark Mode)
 themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  const mode = document.body.classList.contains("dark-mode") ? "Dark" : "Light";
-  themeToggle.textContent = `Switch to ${mode} Mode`;
-});
+    document.body.classList.toggle("dark-mode");
+    document.querySelector(".container").classList.toggle("dark-mode"); // Added this line
+    document.querySelector(".history-div").classList.toggle("dark-mode"); // Added this line
+    const mode = document.body.classList.contains("dark-mode") ? "Dark" : "Light";
+    themeToggle.textContent = `Switch to ${mode} Mode`;
+  });
+  
 
 // PWA - Service Worker registration (Optional enhancement)
 if ("serviceWorker" in navigator) {
