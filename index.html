@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phone Number Validator</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>South African Phone Number Validator</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="container">
-        <input type="text" id="user-input" placeholder="Enter a phone number">
-        <button id="check-btn">Check</button>
-        <button id="clear-btn">Clear</button>
-        <div id="results-div"></div>
+  <div class="container">
+    <h1>SA Phone Number Validator</h1>
+    
+    <!-- Language Selector for Localization -->
+    <select id="language-selector">
+      <option value="en">English</option>
+      <option value="af">Afrikaans</option>
+    </select>
+    
+    <!-- Phone Number Input -->
+    <input type="text" id="user-input" placeholder="Enter a SA phone number" />
+    
+    <!-- Buttons -->
+    <div class="buttons">
+      <button id="check-btn">Check</button>
+      <button id="clear-btn">Clear</button>
+      <button id="show-history-btn">Show History</button>
     </div>
-
-    <script src="script.js"></script>
+    
+    <!-- Results and History Display -->
+    <div id="results-div"></div>
+    <div id="history-div"></div>
+  </div>
+  
+  <script src="script.js"></script>
 </body>
 </html>
