@@ -1,4 +1,7 @@
 # South African Phone Number Validator
+![alt text](image.png)
+
+## DEMO: https://mduduzindlovu-dev.github.io/Telephone-Number-Validator-Ceritfication-Project/
 
 This project is a South African phone number validator web app. It validates if the entered phone number is a valid South African number based on the country's area codes and the number of digits. The app also includes language localization support and allows users to toggle between light and dark modes.
 
